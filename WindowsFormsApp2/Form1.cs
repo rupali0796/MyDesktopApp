@@ -14,7 +14,9 @@ namespace WindowsFormsApp2
 {
     public partial class Form1 : Form
     {
-        string cs = ConfigurationManager.ConnectionStrings["data"].ConnectionString;
+        private SqlConnection con;
+        private SqlCommand cmd;
+        private string cs = ConfigurationManager.ConnectionStrings["data"].ConnectionString;
         public Form1()
         {
             InitializeComponent();
@@ -23,43 +25,51 @@ namespace WindowsFormsApp2
        
         public void DataShow()
         {
-           
-            
-            SqlConnection con = new SqlConnection(cs);
-            con.Open();
-            SqlCommand cmd = new SqlCommand("selectsp", con);
-            SqlDataAdapter sda = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            sda.Fill(dt);
-            con.Close();
-            dgv.DataSource = dt;
-            //dgv.datasource= cmd.executereader();
-
+            using (con = new SqlConnection(cs))
+            {
+                string command = "select * from demo";
+                using (cmd = new SqlCommand(command, con))
+                {
+                    con.Open();
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    con.Close();
+                    dgv.DataSource = dt;
+                }
+            }
         }
 
         private void Submit_Click(object sender, EventArgs e)
         {
             using (SqlConnection con = new SqlConnection(cs))
             {
-                con.Open();
-                SqlCommand cmd = new SqlCommand("InsertSp", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@Name", txtName.Text);
-                cmd.Parameters.AddWithValue("@Age", txtAge.Text);
-                cmd.Parameters.AddWithValue("@Address",txtAddress.Text);
-                cmd.Parameters.AddWithValue("@Country",txtCountry.Text);
-                int i = cmd.ExecuteNonQuery();
-                if(i>0)
+                string cmdtext = "insert into demo(NAME,FATHERNAME,AGE,ADDRESS,COUNTRY,PINCODE)VALUES(@NAME,@FATHERNAME,@AGE,@ADDRESS,@COUNTRY,@PINCODE)";
+                    using (cmd = new SqlCommand(cmdtext, con))
                 {
-                    MessageBox.Show("Data has been saved suceessfully!!!");
+                    cmd.Parameters.AddWithValue("@Name", txtName.Text);
+                    cmd.Parameters.AddWithValue("@Age",Convert.ToInt32(txtAge.Text));
+                    cmd.Parameters.AddWithValue("@Address", txtAddress.Text);
+                    cmd.Parameters.AddWithValue("@Country", txtCountry.Text);
+                    cmd.Parameters.AddWithValue("@FatherName", txtFatherName.Text);
+                    cmd.Parameters.AddWithValue("@PinCode",Convert.ToInt32(txtPinCode.Text));
+                    con.Open();
+                    int response = cmd.ExecuteNonQuery();
+                    con.Close();
+                    if(response>0)
+                    {
+                        MessageBox.Show("Data Inserted");
+                        DataShow();
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Data not saved!!!");
-                }
-                DataShow();
-
             }
         }
+
+        private void dgv_RowHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+        }
+
+        
     }
 }

@@ -38,20 +38,24 @@
             this.txtAge = new System.Windows.Forms.TextBox();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.txtCountry = new System.Windows.Forms.TextBox();
+            this.txtPinCode = new System.Windows.Forms.TextBox();
+            this.txtFatherName = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
             // dgv
             // 
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv.Location = new System.Drawing.Point(61, 305);
+            this.dgv.Location = new System.Drawing.Point(12, 240);
             this.dgv.Name = "dgv";
-            this.dgv.Size = new System.Drawing.Size(559, 145);
+            this.dgv.Size = new System.Drawing.Size(787, 210);
             this.dgv.TabIndex = 0;
             // 
             // Submit
             // 
-            this.Submit.Location = new System.Drawing.Point(182, 258);
+            this.Submit.Location = new System.Drawing.Point(283, 172);
             this.Submit.Name = "Submit";
             this.Submit.Size = new System.Drawing.Size(75, 23);
             this.Submit.TabIndex = 1;
@@ -123,11 +127,47 @@
             this.txtCountry.Size = new System.Drawing.Size(100, 20);
             this.txtCountry.TabIndex = 9;
             // 
+            // txtPinCode
+            // 
+            this.txtPinCode.Location = new System.Drawing.Point(394, 65);
+            this.txtPinCode.Name = "txtPinCode";
+            this.txtPinCode.Size = new System.Drawing.Size(100, 20);
+            this.txtPinCode.TabIndex = 13;
+            // 
+            // txtFatherName
+            // 
+            this.txtFatherName.Location = new System.Drawing.Point(394, 14);
+            this.txtFatherName.Name = "txtFatherName";
+            this.txtFatherName.Size = new System.Drawing.Size(100, 20);
+            this.txtFatherName.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(311, 68);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(47, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "PinCode";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(311, 17);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 13);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "FatherName";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtPinCode);
+            this.Controls.Add(this.txtFatherName);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.txtCountry);
             this.Controls.Add(this.txtAddress);
             this.Controls.Add(this.txtAge);
@@ -158,6 +198,10 @@
         private System.Windows.Forms.TextBox txtAge;
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.TextBox txtCountry;
+        private System.Windows.Forms.TextBox txtPinCode;
+        private System.Windows.Forms.TextBox txtFatherName;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
 
